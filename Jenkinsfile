@@ -16,7 +16,7 @@ pipeline {
             steps {
               script{
                  echo "This is Deploy step."
-                 def branchName = "${env.BRANCH_NAME}"
+                 def branchName = "${env.GIT_BRANCH}"
                  println("Branch name "+branchName)
                  if(branchName == "main"){
                     println("Deploying to Prod.")
