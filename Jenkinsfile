@@ -3,7 +3,8 @@ pipeline {
   stages {
         stage('Build') {
             steps {
-                echo "This is Build step."
+                echo "This is Build step. having env variable"
+                 sh 'printenv'
             }
         }
         stage('Test') {
