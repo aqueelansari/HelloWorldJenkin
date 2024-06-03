@@ -16,13 +16,16 @@ pipeline {
               script{
                  echo "This is Deploy step."
                  def branchName = "${env.BRANCH_NAME}"
-                 println "Branch name "+${branchName}
+                 println("Branch name "+branchName)
                  if(branchName == "main"){
                     println("Deploying to Prod.")
                  }
                  else if(branchName == "test"){
                     println("Deploying to Test.")
                  }
+                 else {
+                        println("Deploying to Default.")
+                        }
               }
             }
         }
