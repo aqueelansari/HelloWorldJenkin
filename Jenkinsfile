@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  environment {
+       BRANCH_NAME = "${GIT_BRANCH.split("/")[1]}"
+    }
+
   stages {
         stage('Build') {
             steps {
@@ -16,7 +20,7 @@ pipeline {
             steps {
               script{
                  echo "This is Deploy step."
-                 def branchName = "${env.GIT_BRANCH}"
+                 def branchName = "${env.BRANCH_NAME}"
                  println("Branch name "+branchName)
                  if(branchName == "main"){
                     println("Deploying to Prod.")
