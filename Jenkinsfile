@@ -1,22 +1,29 @@
 pipeline {
-    agent any
-    stages {
-        stage('Cleaning Stage') {
+  agent any
+  stages {
+        stage('Build') {
             steps {
-                sh 'mvn clean'
+                echo "This is Build step."
             }
         }
-        stage('Testing Stage'){
+        stage('Test') {
             steps {
-                sh 'mvn test'
-
+                echo "This is Test step."
             }
         }
-        stage('Packaging Stage'){
-                    steps {
-                        sh 'mvn package'
-                    }
-                }
-
-    }
+        stage('Deploy') {
+            steps {
+              script{
+                 echo "This is Deploy step."
+                 def branchName = "${env.BRANCH_NAME}"
+                 if(branchName == "master"){
+                    println("Deploying to Prod.")
+                 }
+                 else if(branchName == "test"){
+                    println("Deploying to Test.")
+                 }
+              }
+            }
+        }
+   }
 }
